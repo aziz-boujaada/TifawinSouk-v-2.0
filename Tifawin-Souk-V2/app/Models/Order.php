@@ -16,7 +16,7 @@ class Order extends Model
 
 
     // one order has many items
-    public function orderItem():HasMany{
+    public function orderItems():HasMany{
           return $this->hasMany(OrderItem::class);
     }
 
