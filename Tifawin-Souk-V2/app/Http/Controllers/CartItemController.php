@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class CartItemController extends Controller
 {
-    
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $user = auth()->user();
-
-        $cart = Cart::firstOrCreate(
-        ['user_id' => $user->id] // search criteria
-    );
-        return Cart::with('user')->get();
+        //
     }
 
     /**
@@ -23,7 +20,7 @@ class CartController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -37,7 +34,7 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cart $cart)
+    public function show(CartItem $cartItem)
     {
         //
     }
@@ -45,7 +42,7 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cart $cart)
+    public function edit(CartItem $cartItem)
     {
         //
     }
@@ -53,7 +50,7 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, CartItem $cartItem)
     {
         //
     }
@@ -61,7 +58,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy(CartItem $cartItem)
     {
         //
     }
