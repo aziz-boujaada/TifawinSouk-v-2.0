@@ -16,22 +16,11 @@
             <td>{{ $order->user->name }}</td>
             <td>{{ $order->total_price }}</td>
             <td>{{ $order->status }}</td>
-            <td>
-                <ul>
-                    @forelse($order->orderItems as $item)
-                    <li>
-                        
-                        Product: {{ $item->product->name}} |
-                        Price: {{ $item->unit_price }} | 
-                        Quantity : {{ $item->quantity}}
-                    </li>
-                    @empty
-                    <td>No product </td>
-                    @endforelse
-                </ul>
-             </td>
+            
 
-         
+           <td>
+            <a href="{{route('orders.show' , $order)}}">details</a>
+           </td>
         </tr>
         @endforeach
     </tbody>
