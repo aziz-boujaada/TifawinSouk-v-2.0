@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show' , compact('order'));
+        $orderItems = Order::with('orderItems.product')->get();
+        return view('orders.show' , compact('order' , 'orderItems'));
     }
 
     /**
