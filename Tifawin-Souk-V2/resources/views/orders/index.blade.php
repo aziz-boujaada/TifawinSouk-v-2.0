@@ -13,7 +13,7 @@
         @foreach($orders as $order)
         <tr>
             <td>{{ $order->id }}</td>
-            <td>{{ $order->user_id }}</td>
+            <td>{{ $order->user->name }}</td>
             <td>{{ $order->total_price }}</td>
             <td>{{ $order->status }}</td>
             <td>
@@ -21,7 +21,7 @@
                     @forelse($order->orderItems as $item)
                     <li>
                         
-                        Product: {{ $item->product_id}} |
+                        Product: {{ $item->product->name}} |
                         Price: {{ $item->unit_price }} | 
                         Quantity : {{ $item->quantity}}
                     </li>
@@ -31,9 +31,7 @@
                 </ul>
              </td>
 
-            <td>
-                <a href="{{ route('orders.show', $order->id) }}">Order Details</a>
-            </td>
+         
         </tr>
         @endforeach
     </tbody>

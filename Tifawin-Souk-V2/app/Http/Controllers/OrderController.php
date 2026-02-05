@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with('OrderItems')->get();
+        $orders = Order::with(['OrderItems.product' , 'user'])->get();
         return view('orders.index' , compact('orders'));
     }
 
@@ -23,7 +23,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -39,7 +39,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show' , compact('order'));
     }
 
     /**
