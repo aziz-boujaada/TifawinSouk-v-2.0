@@ -27,14 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/items', [CartItemController::class, 'store'])->name('cartItem.store');
     Route::put('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cartItem.update');
     Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cartItem.destroy');
-});
-    Route::get('/orders', [OrderController::class, 'index']);
-    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-    Route::get('/cart', [TestProductController::class, 'cart'])->name('cart-ui');
+    // Route::get('/cart', [TestProductController::class, 'cart'])->name('cart-ui');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
     Route::post('/test/add/', [OrderItemController::class, 'store'])->name('save-order-items');
 });
+    
 
-require __DIR__.'/auth.php';
 
 require __DIR__ . '/auth.php';

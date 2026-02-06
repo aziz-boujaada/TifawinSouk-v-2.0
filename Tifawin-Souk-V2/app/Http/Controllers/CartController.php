@@ -7,30 +7,23 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    
+
     public function index()
     {
         $user = auth()->user();
 
         $cart = Cart::firstOrCreate(
-        ['user_id' => $user->id] // search criteria
-    );
+            ['user_id' => $user->id] // search criteria
+        );
         // return $cart->items;
-        
-        return view('cart.index' , compact('cart'));
+
+        return view('cart.index', compact('cart'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        
-    }
+    
+  
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         //
@@ -65,6 +58,6 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+
     }
 }
