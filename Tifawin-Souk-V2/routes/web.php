@@ -23,10 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //c art routers
-    Route::get('/cart' , [CartController::class , 'index']);
+    Route::get('/cart' , [CartController::class , 'index'])->name('cart');
     Route::post('/cart/items', [CartItemController::class, 'store'])->name('cartItem.store');
     Route::put('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cartItem.update');
     Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cartItem.destroy');
+   
     
     //ordrers routers
     Route::get('/orders' , [OrderController::class , 'index']);
