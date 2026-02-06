@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/orders' , [OrderController::class , 'index']);
-     Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
+    Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
+    Route::get('/cart' , [CartController::class , 'index']);
+    Route::post('/cart/items', [CartItemController::class, 'store'])->name('cartItem.store');
+    Route::put('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cartItem.update');
+    Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cartItem.destroy');
 });
 
 require __DIR__.'/auth.php';

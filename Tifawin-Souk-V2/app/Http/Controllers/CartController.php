@@ -15,7 +15,9 @@ class CartController extends Controller
         $cart = Cart::firstOrCreate(
         ['user_id' => $user->id] // search criteria
     );
-        return Cart::with('user')->get();
+        // return $cart->items;
+        
+        return view('cart.index' , compact('cart'));
     }
 
     /**
