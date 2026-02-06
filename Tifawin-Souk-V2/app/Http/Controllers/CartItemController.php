@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartItemController extends Controller
 {
@@ -17,7 +18,7 @@ class CartItemController extends Controller
         ]);
 
         $cart = Cart::firstOrCreate([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
         ]);
         
         
