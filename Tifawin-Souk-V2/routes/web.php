@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders' , [OrderController::class , 'index']);
     Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
-    Route::post('/test/add/', [OrderItemController::class, 'store'])->name('save-order-items');
+    Route::post('/test/add/', [OrderController::class, 'store'])->name('save-order-items');
 });
 
 
