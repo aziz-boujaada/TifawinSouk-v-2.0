@@ -7,35 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\OrderItem;
 use App\Models\Product;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-     * 
-     */
     public function index()
     {
         $orders = Order::with(['OrderItems.product' , 'user'])->get();
@@ -58,7 +35,7 @@ class OrderController extends Controller
 
         $orderItems = $request->validate([
             'quantity'   => 'required|integer|min:1',
-                'product_id' => 'integer|exists:products,id',
+            'product_id' => 'integer|exists:products,id',
             'unit_price' => 'required|numeric|min:0'
         ]);
 
