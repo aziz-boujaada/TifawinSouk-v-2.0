@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Illuminate\Http\Request;
 use App\Models\OrderItem;
 use App\Models\Product;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * 
-     */
+
+
     public function index()
     {
         $orders = Order::with(['OrderItems.product' , 'user'])->get();
@@ -37,7 +35,7 @@ class OrderController extends Controller
 
         $orderItems = $request->validate([
             'quantity'   => 'required|integer|min:1',
-                'product_id' => 'integer|exists:products,id',
+            'product_id' => 'integer|exists:products,id',
             'unit_price' => 'required|numeric|min:0'
         ]);
 
@@ -52,7 +50,7 @@ class OrderController extends Controller
         $order->update([
             'total_price' => $total
         ]);
-        return redirect()->route('cart-ui');
+        return redirect()->route('orders');
     }
 
     public function calculateToatl($orderId)
