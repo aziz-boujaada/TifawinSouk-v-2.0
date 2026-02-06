@@ -52,7 +52,7 @@ class OrderController extends Controller
         $order->update([
             'total_price' => $total
         ]);
-        return redirect()->route('cart-ui');
+        return redirect()->route('orders');
     }
 
     public function calculateToatl($orderId)

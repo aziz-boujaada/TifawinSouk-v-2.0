@@ -19,11 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('/cart', [TestProductController::class, 'cart'])->name('cart-ui');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
-    Route::post('/test/add/', [OrderItemController::class, 'store'])->name('save-order-items');
+    Route::post('/test/add/', [OrderController::class, 'store'])->name('save-order-items');
 });
 
 require __DIR__ . '/auth.php';
