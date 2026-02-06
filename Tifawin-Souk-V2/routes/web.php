@@ -27,7 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/items', [CartItemController::class, 'store'])->name('cartItem.store');
     Route::put('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cartItem.update');
     Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cartItem.destroy');
-    Route::get('/cart', [TestProductController::class, 'cart'])->name('cart-ui');
     
     //ordrers routers
     Route::get('/orders' , [OrderController::class , 'index']);
