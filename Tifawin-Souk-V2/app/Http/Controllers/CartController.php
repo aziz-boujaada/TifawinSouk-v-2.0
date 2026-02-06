@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
 
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
         $cart = Cart::firstOrCreate(
-            ['user_id' => $user->id] // search criteria
+            ['user_id' => $user->id] 
         );
-        // return $cart->items;
 
         return view('cart.index', compact('cart'));
     }
