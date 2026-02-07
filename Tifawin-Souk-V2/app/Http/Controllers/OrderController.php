@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::with(['OrderItems.product' , 'user'])->get();
+        $orders = Order::with(['OrderItems.product' , 'user'])->where('user_id' , Auth::id())->get();
         return view('orders.index' , compact('orders'));
     }
 
@@ -42,25 +42,38 @@ public function create()
             'user_id' => Auth::id(),
             'total_price' => 0,
         ]);
-
+        
         $orderItems = $request->validate([
-            'quantity'   => 'required|integer|min:1',
-            'product_id' => 'integer|exists:products,id',
-            'unit_price' => 'required|numeric|min:0'
-        ]);
+            'items' => 'required|array|min:1',
+            'items.*.quantity'   => 'required|integer|min:1',
+            'items.*.product_id' => 'integer|exists:products,id',
+            
+            ]);
+            
+            
+                    foreach($request->items as $item){
+                        
+                        OrderItem::create([
+                            'quantity' => $item['quantity'],
+                            'product_id' => $item['product_id'],
+                            'order_id' => $order->id,
+                            'unit_price' => $item['unit_price']
+                        ]);
+                    }
 
-        OrderItem::create([
-            'quantity' => $orderItems['quantity'],
-            'product_id' => $orderItems['product_id'],
-            'order_id' => $order->id,
-            'unit_price' => $orderItems['unit_price']
-        ]);
+
+         
 
         $total = $this->calculateToatl($order->id);
         $order->update([
             'total_price' => $total
         ]);
-        return redirect()->route('cart');
+
+        $cart = Cart::where('user_id' , Auth::id())->first();
+        $cart->items()->delete();
+
+
+        return redirect()->route('orders');
     }
 
     public function calculateToatl($orderId)
