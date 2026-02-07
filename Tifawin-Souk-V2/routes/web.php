@@ -30,10 +30,11 @@ Route::middleware('auth')->group(function () {
    
     
     //ordrers routers
-    Route::get('/orders' , [OrderController::class , 'index']);
+    Route::get('/orders' , [OrderController::class , 'index'])->name('orders');
     Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
-    Route::post('/test/add/', [OrderController::class, 'store'])->name('save-order-items');
+    Route::post('/orders/add/', [OrderController::class, 'store'])->name('save-order-items');
+    
 });
 
 

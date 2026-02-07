@@ -8,47 +8,55 @@
     <title>Test Product</title>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  @foreach($products as $product)
-    <div class="bg-white rounded-xl shadow-2xl max-w-sm p-6">
-        <!-- Product Image -->
-        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="rounded-lg mb-4 w-full h-48 object-cover">
+<body class="bg-gray-100 min-h-screen">
 
-        <!-- Product Name -->
-        <h2 class="text-2xl font-bold mb-2">{{ $product->id }}</h2>
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-6 text-center">Products</h1>
 
-        <h2 class="text-2xl font-bold mb-2">{{ $product->name }}</h2>
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @foreach($products as $product)
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col">
+                <!-- Product Image -->
+                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="rounded-lg mb-4 w-full h-48 object-cover">
 
-        <!-- Product Description -->
-        <p class="text-gray-600 mb-4">{{ $product->description }}</p>
+                <!-- Product Name -->
+                <h2 class="text-xl font-bold mb-2">{{ $product->name }}</h2>
 
-        <!-- Product Price -->
-        <div class="text-xl font-semibold mb-4">$ {{ $product->price }}</div>
-          <form action="{{route('cartItem.store')}}" method="post">
-            @csrf
-        <label for="quantity">Q:</label>
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <input type="hidden" name="unit_price" value="{{ $product->price }}">
+                <!-- Product Description -->
+                <p class="text-gray-600 mb-4 flex-1">{{ $product->description }}</p>
 
-        <input
-            type="number"
-            name="quantity"
-            min="1"
-            value="1"
-            class="w-16 px-2 py-1 bg-gray-100 border border-gray-300 rounded-md
-           text-center font-semibold
-           focus:outline-none focus:ring-1 focus:ring-indigo-500
-           transition mb-3">
-        <br>
+                <!-- Product Price -->
+                <div class="text-lg font-semibold mb-4">$ {{ $product->price }}</div>
 
-        <button type="submit"> Add to Cart</button>
-          </form>
+                <!-- Add to Cart Form -->
+                <form action="{{ route('cartItem.store') }}" method="post" class="flex flex-col items-center">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="unit_price" value="{{ $product->price }}">
 
-       
-           
-       
+                    <div class="flex items-center mb-3">
+                        <label for="quantity" class="mr-2 font-semibold">Qty:</label>
+                        <input
+                            type="number"
+                            name="quantity"
+                            min="1"
+                            value="1"
+                            class="w-16 px-2 py-1 bg-gray-100 border border-gray-300 rounded-md text-center font-semibold
+                                focus:outline-none focus:ring-1 focus:ring-indigo-500 transition">
+                    </div>
+
+                    <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 transition">
+                        Add to Cart
+                    </button>
+                </form>
+            </div>
+            @endforeach
+        </div>
+        <div class="mt-6">
+            {{ $products->links() }}
+        </div>
     </div>
-    @endforeach
 
 </body>
 

@@ -14,15 +14,11 @@ class TestProductController extends Controller
 {
   public function index()
   {
-    $products = Product::all();
+    $products = Product::paginate(4);
     return view('test', compact('products'));
   }
 
-//   public function cart()
-//   {
-//     $cartItems = CartItem::with('product')->get();
-//     return view('cart', compact('cartItems'));
-//   }
+
 
 
 }
