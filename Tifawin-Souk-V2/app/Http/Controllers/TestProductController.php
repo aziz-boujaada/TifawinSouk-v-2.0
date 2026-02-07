@@ -18,11 +18,11 @@ class TestProductController extends Controller
     return view('test', compact('products'));
   }
 
-  public function cart()
-  {
-    $cartItems = CartItem::with('product')->get();
-    return view('cart-ui', compact('cartItems'));
-  }
+//   public function cart()
+//   {
+//     $cartItems = CartItem::with('product')->get();
+//     return view('cart', compact('cartItems'));
+//   }
 
 
 }

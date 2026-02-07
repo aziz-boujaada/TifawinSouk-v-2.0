@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderItem;
@@ -20,7 +21,16 @@ class OrderController extends Controller
     }
 
   
+public function create()
+    {
+        $cart = Cart::firstOrCreate([
+            'user_id' => Auth::id(),
+        ]);
 
+        $cart->load('items.product');
+
+        return view('orders.create', compact('cart'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -50,7 +60,7 @@ class OrderController extends Controller
         $order->update([
             'total_price' => $total
         ]);
-        return redirect()->route('cart-ui');
+        return redirect()->route('cart');
     }
 
     public function calculateToatl($orderId)

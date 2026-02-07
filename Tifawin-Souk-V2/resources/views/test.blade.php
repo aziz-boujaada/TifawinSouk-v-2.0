@@ -24,7 +24,7 @@
 
         <!-- Product Price -->
         <div class="text-xl font-semibold mb-4">$ {{ $product->price }}</div>
-          <form action="{{route('save-order-items')}}" method="post">
+          <form action="{{route('cartItem.store')}}" method="post">
             @csrf
         <label for="quantity">Q:</label>
             <input type="hidden" name="product_id" value="{{ $product->id }}">

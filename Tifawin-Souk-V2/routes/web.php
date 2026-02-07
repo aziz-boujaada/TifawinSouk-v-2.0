@@ -23,17 +23,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //c art routers
-    Route::get('/cart' , [CartController::class , 'index']);
+    Route::get('/cart' , [CartController::class , 'index'])->name('cart');
     Route::post('/cart/items', [CartItemController::class, 'store'])->name('cartItem.store');
     Route::put('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cartItem.update');
     Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cartItem.destroy');
-    Route::get('/cart', [TestProductController::class, 'cart'])->name('cart-ui');
+   
     
     //ordrers routers
     Route::get('/orders' , [OrderController::class , 'index']);
     Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
-    Route::post('/test/add/', [OrderItemController::class, 'store'])->name('save-order-items');
+    Route::post('/test/add/', [OrderController::class, 'store'])->name('save-order-items');
 });
 
 

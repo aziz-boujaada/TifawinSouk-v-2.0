@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartItemController extends Controller
 {
@@ -12,13 +13,31 @@ class CartItemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:product,id',
+            'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
         ]);
 
         $cart = Cart::firstOrCreate([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
         ]);
+        
+        
+         $cartItem = $cart->items()->where('product_id', $request->product_id)->first();
+
+        if ($cartItem) {
+
+            $cartItem->quantity += $request->quantity;
+            $cartItem->save();
+
+        } else {
+
+            $cart->items()->create([
+                'product_id' => $request->product_id,
+                'quantity'   => $request->quantity,
+            ]);
+        }
+        return redirect()->back();
+        
     }
 
 
