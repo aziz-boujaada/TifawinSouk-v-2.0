@@ -30,7 +30,7 @@ class ProductController extends Controller
         $products = $query->latest()->paginate(20);
         $categories = Category::all();
 
-        return view('admin.products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories'));
     }
 
     /**
@@ -41,7 +41,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $suppliers = Supplier::all();
 
-        return view('admin.products.create', compact('categories', 'suppliers'));
+        return view('products.create', compact('categories', 'suppliers'));
     }
 
     /**
@@ -58,7 +58,7 @@ class ProductController extends Controller
         Product::create($data);
 
         return redirect()
-            ->route('admin.products.index')
+            ->route('products.index')
             ->with('success', 'Produit créé avec succès.');
     }
 
@@ -68,7 +68,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load(['category', 'supplier']);
-        return view('admin.products.show', compact('product'));
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -79,7 +79,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $suppliers = Supplier::all();
 
-        return view('admin.products.edit', compact('product', 'categories', 'suppliers'));
+        return view('products.edit', compact('product', 'categories', 'suppliers'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ProductController extends Controller
         $product->update($data);
 
         return redirect()
-            ->route('admin.products.index')
+            ->route('products.index')
             ->with('success', 'Produit mis à jour avec succès.');
     }
 
@@ -112,7 +112,7 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()
-            ->route('admin.products.index')
+            ->route('products.index')
             ->with('success', 'Produit archivé avec succès.');
     }
 
@@ -126,7 +126,7 @@ class ProductController extends Controller
             ->latest()
             ->paginate(20);
 
-        return view('admin.products.archived', compact('products'));
+        return view('products.archived', compact('products'));
     }
 
     /**
@@ -138,7 +138,7 @@ class ProductController extends Controller
         $product->restore();
 
         return redirect()
-            ->route('admin.products.index')
+            ->route('products.index')
             ->with('success', 'Produit restauré avec succès.');
     }
 }
