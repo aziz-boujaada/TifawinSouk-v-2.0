@@ -1,8 +1,8 @@
 <?php
 
 
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
