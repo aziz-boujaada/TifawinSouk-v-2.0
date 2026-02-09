@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SupplierSeeder::class,
             ProductSeeder::class,
+            OrderSeeder::class,
+            OrderItemSeeder::class,
         ]);
-
-        $this->call([OrderSeeder::class , OrderItemSeeder::class]);
     }
 }
