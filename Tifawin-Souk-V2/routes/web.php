@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
     Route::post('/orders/add/', [OrderController::class, 'store'])->name('save-order-items');
     
+    
 });
 
 
