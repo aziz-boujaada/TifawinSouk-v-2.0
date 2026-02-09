@@ -1,11 +1,6 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CartItemController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OrderItemController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TestProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
