@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
@@ -55,6 +56,8 @@ Route::middleware('auth')->group(function () {
         
         Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
     });
+
+
     Route::prefix('suppliers')->name('suppliers.')->group(function () {
         
         Route::get('/', [SupplierController::class, 'index'])->name('index');
@@ -71,7 +74,29 @@ Route::middleware('auth')->group(function () {
         
         Route::delete('/{supplier}', [SupplierController::class, 'destroy'])->name('destroy');
     });
+
     
+    Route::prefix('products')->name('products.')->group(function () {
+        
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        
+        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        
+        Route::post('/', [ProductController::class, 'store'])->name('store');
+        
+        Route::get('/archived', [ProductController::class, 'archived'])->name('archived');
+        
+        Route::get('/{product}', [ProductController::class, 'show'])->name('show');
+        
+        Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
+        
+        Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+        
+        Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+        
+        Route::post('/{id}/restore', [ProductController::class, 'restore'])->name('restore');
+    });
+
     
 });
 
