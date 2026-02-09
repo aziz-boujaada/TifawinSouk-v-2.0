@@ -18,7 +18,7 @@ class CategoryController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.categories.index', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('categories.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class CategoryController extends Controller
         Category::create($request->validated());
 
         return redirect()
-            ->route('admin.categories.index')
+            ->route('categories.index')
             ->with('success', 'Catégorie créée avec succès.');
     }
 
@@ -46,7 +46,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -57,7 +57,7 @@ class CategoryController extends Controller
         $category->update($request->validated());
 
         return redirect()
-            ->route('admin.categories.index')
+            ->route('categories.index')
             ->with('success', 'Catégorie mise à jour avec succès.');
     }
 
@@ -68,14 +68,14 @@ class CategoryController extends Controller
     {
         if ($category->products()->count() > 0) {
             return redirect()
-                ->route('admin.categories.index')
+                ->route('categories.index')
                 ->with('error', 'Impossible de supprimer cette catégorie car elle contient des produits.');
         }
 
         $category->delete();
 
         return redirect()
-            ->route('admin.categories.index')
+            ->route('categories.index')
             ->with('success', 'Catégorie supprimée avec succès.');
     }
 }
