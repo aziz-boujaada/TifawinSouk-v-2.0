@@ -19,8 +19,29 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cartItems()
+    public function items()
     {
         return $this->hasMany(CartItem::class);
     }
+    public function totalPrice()
+    {
+        $user = auth()->user();
+
+        $cart = Cart::firstOrCreate(
+            ['user_id' => $user->id] // search criteria
+        );
+        $cartItems = $cart->items;
+        $cartTotal = 0;
+        $cart->load('items.product');
+        foreach ($cartItems as $item) {
+
+            $cartTotal = $cartTotal + $item->product->price * $item->quantity;
+
+        }
+        return $cartTotal;
+    }
+    public function totalQuantity()
+{
+    return $this->items->sum('quantity');
+}
 }
