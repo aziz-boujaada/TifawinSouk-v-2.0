@@ -1,8 +1,9 @@
 <?php
 
+
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestProductController;
@@ -34,6 +35,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
     Route::post('/orders/add/', [OrderController::class, 'store'])->name('save-order-items');
+
+
+    Route::prefix('categories')->name('categories.')->group(function () {
+        
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        
+        Route::get('/create', [CategoryController::class, 'create'])->name('create');
+        
+        Route::post('/', [CategoryController::class, 'store'])->name('store');
+        
+        Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('edit');
+        
+        Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
+        
+        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
     
     
 });
