@@ -7,6 +7,7 @@ use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestProductController;
+use App\Http\Controllers\DahsboardController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,9 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', action: [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{order}' , [OrderController::class , 'show'])->name('orders.show');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
     Route::post('/orders/add/', [OrderController::class, 'store'])->name('save-order-items');
+
+
+    // dashboard  routers
+    Route::get('/dashboard' , [DahsboardController::class , 'index'])->name('dashboard');
 
 
     Route::prefix('categories')->name('categories.')->group(function () {
