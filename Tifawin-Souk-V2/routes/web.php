@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
@@ -50,6 +51,22 @@ Route::middleware('auth')->group(function () {
         Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
         
         Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+    });
+    Route::prefix('suppliers')->name('suppliers.')->group(function () {
+        
+        Route::get('/', [SupplierController::class, 'index'])->name('index');
+        
+        Route::get('/create', [SupplierController::class, 'create'])->name('create');
+        
+        Route::post('/', [SupplierController::class, 'store'])->name('store');
+        
+        Route::get('/{supplier}', [SupplierController::class, 'show'])->name('show');
+        
+        Route::get('/{supplier}/edit', [SupplierController::class, 'edit'])->name('edit');
+        
+        Route::put('/{supplier}', [SupplierController::class, 'update'])->name('update');
+        
+        Route::delete('/{supplier}', [SupplierController::class, 'destroy'])->name('destroy');
     });
     
     
