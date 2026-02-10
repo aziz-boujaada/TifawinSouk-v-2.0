@@ -45,7 +45,7 @@
                             </a>
                         </td>
                         <td class="py-2 px-4 border-b">
-                            <a href="" 
+                            <a href="{{route('edit-order' , $order)}}" 
                                class="bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600 transition">
                                 Edit
                             </a>
