@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::with(['OrderItems.product' , 'user'])->where('user_id' , Auth::id())->paginate(10);
+        $orders = Order::with(['products','user'])->where('user_id' , Auth::id())->paginate(10);
         return view('admin.orders.index' , compact('orders'));
     }
 
@@ -93,7 +93,7 @@ public function create()
      */
     public function show(Order $order)
     {
-        $order->load('orderItems.product');
+        $order->load('products');
         return view('admin.orders.show' , compact('order'));
     }
 

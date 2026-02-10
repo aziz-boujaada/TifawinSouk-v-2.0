@@ -41,10 +41,15 @@ class Product extends Model
     {
         return $this->hasMany(CartItem::class);
     }
-
-    public function orderItems()
+    
+public function orders()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(
+            Order::class,
+            'order-items',
+            'order_id',
+            'product_id'
+        )->withPivot('quantity', 'unit_price');
     }
 
     public function isInStock(): bool

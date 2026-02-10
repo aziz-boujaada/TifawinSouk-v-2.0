@@ -8,17 +8,18 @@
 </head>
 
 <body>
-    <h1>{{$order->id}}</h1>
+    <h1>{{$order->status}}</h1>
     <div>
-        <form action="{{route('update-order' , $order->id)}}" method="post">
+        <form action="{{route('update-order' , $order)}}" method="post">
             @csrf 
             @method('PUT')
             <h4>Upadate Order status </h4>
-            <label for="sttaus">Status</label>
+            <label for="status">Status</label>
             <select name="status" id="">
-                <option value="delivered">Delivered</option>
-                <option value="canceled">Canceled</option>
-                <option value="pending">Pending</option>
+                <option value="delivered" @selected($order->status === 'delivered')>Delivered</option>
+                <option value="canceled" @selected($order->status === 'canceled')>Canceled</option>
+                <option value="pending"@selected($order->status === 'pending')>Pending</option> 
+                <option value="processing"@selected($order->status === 'processing')>processing</option>                                            ')>Pending</option>
             </select>
             <button type="submit">update status</button>
         </form>

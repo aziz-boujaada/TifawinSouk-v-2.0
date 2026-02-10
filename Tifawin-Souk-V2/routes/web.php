@@ -34,8 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('/test/{product}', [TestProductController::class, 'index'])->name('product-ui');
     Route::post('/orders/add/', [OrderController::class, 'store'])->name('save-order-items');
-    Route::get('orders/edit/{oreder}', [OrderController::class, 'edit'])->name('edit-order');
-    Route::put('orders/update', [OrderController::class, 'update'])->name('update-order');
+    Route::get('orders/edit/{order}', [OrderController::class, 'edit'])->name('edit-order');
+    Route::put('orders/update/{order}', [OrderController::class, 'update'])->name('update-order');
 
 
     // dashboard  routers
