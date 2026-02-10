@@ -24,10 +24,9 @@ Route::middleware('auth')->group(function () {
 
     //c art routers
     Route::get('/cart' , [CartController::class , 'index'])->name('cart');
-    Route::post('/cart/items', [CartItemController::class, 'store'])->name('cartItem.store');
-    Route::put('/cart/items/{cartItem}', [CartItemController::class, 'update'])->name('cartItem.update');
-    Route::delete('/cart/items/{cartItem}', [CartItemController::class, 'destroy'])->name('cartItem.destroy');
-   
+    Route::post('/cart/add', [CartController::class, 'addProduct'])->name('cart.add');
+    Route::patch('/cart/update/{product}', [CartController::class, 'updateProduct'])->name('cart.update');
+    Route::delete('/cart/remove/{product}', [CartController::class, 'removeProduct'])->name('cart.remove'); 
     
     //ordrers routers
     Route::get('/orders' , [OrderController::class , 'index'])->name('orders');
