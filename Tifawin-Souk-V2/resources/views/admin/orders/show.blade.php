@@ -16,13 +16,13 @@
 
             <h1 class="text-2xl font-bold mb-4">Order Items</h1>
 
-            @if($order->orderItems->count() > 0)
+            @if($order->products->count() > 0)
             <ul>
-                @foreach ($order->orderItems as $item)
+                @foreach ($order->products as $item)
                 <li class="border-b py-2">
-                    Name : {{ $item->product->name }}
-                    Quantity: {{ $item->quantity }} -
-                    Price: ${{ $item->unit_price }}
+                    Name : {{ $item->name }}
+                    Quantity: {{ $item->pivot->quantity }} -
+                    Price: ${{ $item->pivot->unit_price }}
                 </li>
                 @endforeach
             </ul>
