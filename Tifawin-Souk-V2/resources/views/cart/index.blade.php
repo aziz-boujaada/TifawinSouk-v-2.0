@@ -6,19 +6,28 @@
          @include('components.header')
         
     <div class="cart-infos">
-        <p class="cart-info">Total number of items ({{ $cart->totalQuantity() }})</p>
-        <p class="cart-info">Totale price {{ $cart->totalPrice() }} MAD</p>
+        <p class="cart-info">Total items ({{ $cart->totalQuantity() }})</p>
+        <p class="cart-info">Price {{ $cart->totalPrice() }} MAD</p>
     </div>
         <section class="cart-section">
         @forelse($cart->items as $cartItem)
                        
                 <div class="product-container">
-
-                <img src="{{ $cartItem->product->image }}" alt="{{ $cartItem->product->reference }}">
+                <div class="product-img">
+                    <img src="{{ $cartItem->product->image }}" alt="{{ $cartItem->product->reference }}">
+                </div>
                 <h2>{{ $cartItem->product->name }}</h2>
-                <p>{{ $cartItem->product->description }}</p>
+                <p class="description">{{ $cartItem->product->description }}</p>
                 <p class="price">{{ $cartItem->product->price }} MAD</p>
                 <p class="quantity">{{ $cartItem->quantity }}</p>
+                <form action="{{ route('cartItem.destroy', $cartItem) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn delete-btn">
+                        
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
                 </div>
                             <!-- <td class="">{{ $cartItem->product->name }}</td>
                             <td class="">{{ $cartItem->product->price }}</td>

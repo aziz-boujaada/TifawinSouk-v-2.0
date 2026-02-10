@@ -91,6 +91,7 @@ body{
     gap: 0.6rem;
     display: flex;
     flex-direction: column;
+    height: 370px;
 }
 .product-container h2{
     color: var(--primary_color);
@@ -107,6 +108,8 @@ body{
     object-fit: cover;    /* or cover – explained below */
     display: block;
     border-radius: 1rem;
+    background-color: var(--gray);
+    overflow: hidden;
 }
 
 .quantity-input {
@@ -130,7 +133,7 @@ body{
     float: right;
 }
 .product-section , .cart-section {
-    
+    margin-top: 6rem;
     display: grid;
     place-items: center;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -139,6 +142,9 @@ body{
 }
 
 nav{
+    top: 0;
+    width: 100%;
+    position: fixed;
     color: var(--surface);
     background-color: var(--primary_color);
     display: flex;
@@ -175,13 +181,25 @@ nav a:hover{
     right: 2rem;
 }
 .cart-info{
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     color: var(--primary_color);
     /* text-decoration: underline; */
 }
 .cart-infos{
+    top: 4rem;
+    align-self: center;
+    border-radius: 2rem;
+    background-color: var(--surface);
+    position: fixed;
+    width:96%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.description{
+    font-size: 0.8rem;
 }
