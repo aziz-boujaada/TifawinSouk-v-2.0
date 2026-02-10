@@ -20,7 +20,7 @@ class SupplierController extends Controller
             $query->search($search);
         }
 
-        $suppliers = $query->latest()->paginate(15);
+        $suppliers = $query->latest()->paginate(8);
 
         return view('admin.suppliers.index', compact('suppliers'));
     }
