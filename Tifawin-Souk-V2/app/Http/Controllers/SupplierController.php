@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplierRequest;
@@ -20,9 +20,9 @@ class SupplierController extends Controller
             $query->search($search);
         }
 
-        $suppliers = $query->latest()->paginate(15);
+        $suppliers = $query->latest()->paginate(8);
 
-        return view('admin.suppliers.index', compact('suppliers'));
+        return view('suppliers.index', compact('suppliers'));
     }
 
     /**
@@ -30,7 +30,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('admin.suppliers.create');
+        return view('suppliers.create');
     }
 
     /**
@@ -41,7 +41,7 @@ class SupplierController extends Controller
         Supplier::create($request->validated());
 
         return redirect()
-            ->route('admin.suppliers.index')
+            ->route('suppliers.index')
             ->with('success', 'Fournisseur créé avec succès.');
     }
 
@@ -51,7 +51,7 @@ class SupplierController extends Controller
     public function show(Supplier $supplier)
     {
         $supplier->load('products');
-        return view('admin.suppliers.show', compact('supplier'));
+        return view('suppliers.show', compact('supplier'));
     }
 
     /**
@@ -59,7 +59,7 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        return view('admin.suppliers.edit', compact('supplier'));
+        return view('suppliers.edit', compact('supplier'));
     }
 
     /**
@@ -81,14 +81,14 @@ class SupplierController extends Controller
     {
         if ($supplier->products()->count() > 0) {
             return redirect()
-                ->route('admin.suppliers.index')
+                ->route('suppliers.index')
                 ->with('error', 'Impossible de supprimer ce fournisseur car il a des produits associés.');
         }
 
         $supplier->delete();
 
         return redirect()
-            ->route('admin.suppliers.index')
+            ->route('suppliers.index')
             ->with('success', 'Fournisseur supprimé avec succès.');
     }
 }
