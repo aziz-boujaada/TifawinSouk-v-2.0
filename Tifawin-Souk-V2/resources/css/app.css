@@ -206,3 +206,8 @@ nav a:hover{
 .description{
     font-size: 0.8rem;
 }
+.item-options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

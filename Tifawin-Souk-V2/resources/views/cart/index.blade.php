@@ -20,13 +20,17 @@
                 <p class="description">{{ $product->supplier->name }}</p>
                 <p class="price">{{ $product->price }} MAD</p>
                 <p class="quantity">{{ $product->pivot->quantity }}</p>
-                <form action="{{ route('cart.remove', $product->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn delete-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </form>
+                <div class="item-options">
+                    <a href="">show more</a>
+                    <form action="{{ route('cart.remove', $product->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn delete-btn">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+
+                </div>
             </div>
             <!-- <td class="">{{ $product->name }}</td>
                                 <td class="">{{ $product->price }}</td>
