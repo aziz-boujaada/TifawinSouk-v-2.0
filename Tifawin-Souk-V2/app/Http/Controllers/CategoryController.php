@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = Category::withProductCount()
             ->latest()
-            ->paginate(15);
+            ->paginate(8);
 
         return view('categories.index', compact('categories'));
     }
