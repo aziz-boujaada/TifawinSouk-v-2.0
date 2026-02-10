@@ -91,20 +91,23 @@ body{
     gap: 0.6rem;
     display: flex;
     flex-direction: column;
-    height: 370px;
+    height: 400px;
 }
 .product-container h2{
+    font-size: 1.2rem;
     color: var(--primary_color);
 }
-.desc{
-    color: var(--danger);
+.description{
+    color: var(--gray);
+    font-weight: 600;
 }
 .price{
     color:var(--sharp) ;
+    font-weight: 700;
 }
 .product-img {
     width: 100%;
-    height: 180px;          /* fixed product image height */
+    height: 250px;          /* fixed product image height */
     object-fit: cover;    /* or cover – explained below */
     display: block;
     border-radius: 1rem;

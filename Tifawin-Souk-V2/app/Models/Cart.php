@@ -10,38 +10,31 @@ class Cart extends Model
     /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
 
-     protected $fillable = [
+    protected $fillable = [
         'user_id',
     ];
-    
-     public function user()
+
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function items()
+    public function products()
     {
-        return $this->hasMany(CartItem::class);
+        return $this->belongsToMany(Product::class, 'cart_items')
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
+
+
     public function totalPrice()
-    {
-        $user = auth()->user();
-
-        $cart = Cart::firstOrCreate(
-            ['user_id' => $user->id] // search criteria
-        );
-        $cartItems = $cart->items;
-        $cartTotal = 0;
-        $cart->load('items.product');
-        foreach ($cartItems as $item) {
-
-            $cartTotal = $cartTotal + $item->product->price * $item->quantity;
-
-        }
-        return $cartTotal;
-    }
-    public function totalQuantity()
 {
-    return $this->items->sum('quantity');
+    return $this->products
+        ->map(fn ($product) => $product->pivot->quantity * $product->price)
+        ->sum();
+}
+public function totalQuantity()
+{
+    return $this->products->pluck('pivot.quantity')->sum();
 }
 }
