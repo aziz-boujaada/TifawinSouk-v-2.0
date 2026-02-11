@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('homePage');
+
+
+Route::middleware(['auth' , 'admin'])->group(function(){
+        // dashboard  routers
+    Route::get('/dashboard', [DahsboardController::class, 'index'])->name('dashboard');
 });
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', action: [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -39,8 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::put('orders/update/{order}', [OrderController::class, 'update'])->name('update-order');
 
 
-    // dashboard  routers
-    Route::get('/dashboard', [DahsboardController::class, 'index'])->name('dashboard');
+  
 
 
     Route::prefix('categories')->name('categories.')->group(function () {
