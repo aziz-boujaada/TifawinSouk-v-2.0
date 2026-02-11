@@ -36,7 +36,7 @@ public function create()
      */
        public function store(Request $request)
     {
-
+   
 
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -44,20 +44,20 @@ public function create()
         ]);
         
         $orderItems = $request->validate([
-            'items' => 'required|array|min:1',
-            'items.*.quantity'   => 'required|integer|min:1',
-            'items.*.product_id' => 'integer|exists:products,id',
+            'products' => 'required|array|min:1',
+            'products.*.quantity'   => 'required|integer|min:1',
+            'products.*.product_id' => 'integer|exists:products,id',
             
             ]);
             
             
-                    foreach($request->items as $item){
+                    foreach($request->products as $product){
                         
                         OrderItem::create([
-                            'quantity' => $item['quantity'],
-                            'product_id' => $item['product_id'],
+                            'quantity' => $product['quantity'],
+                            'product_id' => $product['product_id'],
                             'order_id' => $order->id,
-                            'unit_price' => $item['unit_price']
+                            'unit_price' => $product['unit_price']
                         ]);
                     }
 
@@ -70,7 +70,7 @@ public function create()
         ]);
 
         $cart = Cart::where('user_id' , Auth::id())->first();
-        $cart->items()->delete();
+        $cart->products()->detach();
 
 
         return redirect()->route('orders');
@@ -114,7 +114,7 @@ public function create()
 
  
         $order_status = $request->validate([
-            'status' => 'string|in:pending,delivered,caceled',
+            'status' => 'string|in:pending,delivered,canceled,processing',
         ]);
 
         

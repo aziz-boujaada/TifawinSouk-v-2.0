@@ -60,7 +60,7 @@
 
         </a>
 
-         <a href="{{route(orders)}}"
+         <a href="{{route('orders')}}"
 
             class="flex items-center justify-around gap-6 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded transition">
 

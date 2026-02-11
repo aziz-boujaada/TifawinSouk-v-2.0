@@ -30,7 +30,7 @@
                 <div class="text-lg font-semibold mb-4">$ {{ $product->price }}</div>
 
                 <!-- Add to Cart Form -->
-                <form action="{{ route('cartItem.store') }}" method="post" class="flex flex-col items-center">
+                <form action="{{ route('cart.add') }}" method="post" class="flex flex-col items-center">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="unit_price" value="{{ $product->price }}">
