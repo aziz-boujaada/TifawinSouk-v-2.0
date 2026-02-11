@@ -70,7 +70,7 @@ class SupplierController extends Controller
         $supplier->update($request->validated());
 
         return redirect()
-            ->route('admin.suppliers.index')
+            ->route('suppliers.index')
             ->with('success', 'Fournisseur mis à jour avec succès.');
     }
 
