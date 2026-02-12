@@ -10,10 +10,7 @@ class ProductRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        return $this->user() && $this->user()->isAdmin();
-    }
+   
 
     /**
      * Get the validation rules that apply to the request.
@@ -35,7 +32,7 @@ class ProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'image' => ['nullable', 'url', 'max:2048'],
             'category_id' => ['required', 'exists:categories,id'],
             'supplier_id' => ['required', 'exists:suppliers,id'],
         ];

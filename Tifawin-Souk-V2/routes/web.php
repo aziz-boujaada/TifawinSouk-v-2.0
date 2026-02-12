@@ -5,11 +5,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductsAdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestProductController;
-use App\Http\Controllers\DahsboardController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,9 +19,16 @@ Route::get('/', function () {
 })->name('homePage');
 
 
-Route::middleware(['auth' , 'admin'])->group(function(){
-        // dashboard  routers
-    Route::get('/dashboard', [DahsboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth', 'admin'])->group(function () {
+    // dashboard  routers
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/products', [ProductsAdminController::class, 'index'])->name('dashboard.products');
+    Route::get('/dashboard/products/create', [ProductsAdminController::class, 'create'])->name('dashboard.products.create');
+    Route::post('/dashboard/products/store', [ProductsAdminController::class, 'store'])->name('dashboard.products.store');
+    Route::get('/dashboard/products/show/{product}', [ProductsAdminController::class, 'show'])->name('dashboard.products.show');
+    Route::get('/dashboard/products/edit/{product}', [ProductsAdminController::class, 'edit'])->name('dashboard.products.edit');
+    Route::put('/dashboard/products/update/{product}', [ProductsAdminController::class, 'update'])->name('dashboard.products.update');
+    Route::delete('/dashboard/products/destroy/{product}', [ProductsAdminController::class, 'destroy'])->name('dashboard.products.destroy');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', action: [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,11 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //c art routers
-    Route::get('/cart' , [CartController::class , 'index'])->name('cart');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::post('/cart/add', [CartController::class, 'addProduct'])->name('cart.add');
     Route::patch('/cart/update/{product}', [CartController::class, 'updateProduct'])->name('cart.update');
-    Route::delete('/cart/remove/{product}', [CartController::class, 'removeProduct'])->name('cart.remove'); 
-    
+    Route::delete('/cart/remove/{product}', [CartController::class, 'removeProduct'])->name('cart.remove');
+
     //ordrers routers
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
@@ -42,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::put('orders/update/{order}', [OrderController::class, 'update'])->name('update-order');
 
 
-  
+
 
 
     Route::prefix('categories')->name('categories.')->group(function () {
@@ -62,45 +70,43 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('suppliers')->name('suppliers.')->group(function () {
-        
+
         Route::get('/', [SupplierController::class, 'index'])->name('index');
-        
+
         Route::get('/create', [SupplierController::class, 'create'])->name('create');
-        
+
         Route::post('/', [SupplierController::class, 'store'])->name('store');
-        
+
         Route::get('/{supplier}', [SupplierController::class, 'show'])->name('show');
-        
+
         Route::get('/{supplier}/edit', [SupplierController::class, 'edit'])->name('edit');
-        
+
         Route::put('/{supplier}', [SupplierController::class, 'update'])->name('update');
-        
+
         Route::delete('/{supplier}', [SupplierController::class, 'destroy'])->name('destroy');
     });
 
-    
+
     Route::prefix('products')->name('products.')->group(function () {
-        
+
         Route::get('/', [ProductController::class, 'index'])->name('index');
-        
+
         Route::get('/create', [ProductController::class, 'create'])->name('create');
-        
+
         Route::post('/', [ProductController::class, 'store'])->name('store');
-        
+
         Route::get('/archived', [ProductController::class, 'archived'])->name('archived');
-        
+
         Route::get('/{product}', [ProductController::class, 'show'])->name('show');
-        
+
         Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
-        
+
         Route::put('/{product}', [ProductController::class, 'update'])->name('update');
-        
+
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
-        
+
         Route::post('/{id}/restore', [ProductController::class, 'restore'])->name('restore');
     });
-
-    
 });
 
 
