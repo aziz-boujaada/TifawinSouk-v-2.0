@@ -30,7 +30,7 @@ class CartController extends Controller
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
 
-        // If product exists, increment quantity
+        
         $existing = $cart->products()->where('product_id', $request->product_id)->first();
 
         if ($existing) {
@@ -74,43 +74,4 @@ public function removeProduct($productId)
 }
 
 
-
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cart $cart)
-    {
-
-    }
 }
