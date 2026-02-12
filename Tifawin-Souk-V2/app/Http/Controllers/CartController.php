@@ -30,7 +30,7 @@ class CartController extends Controller
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
 
-        
+
         $existing = $cart->products()->where('product_id', $request->product_id)->first();
 
         if ($existing) {
@@ -48,30 +48,31 @@ class CartController extends Controller
 
 
     public function updateProduct(Request $request, $productId)
-{
-    $request->validate([
-        'quantity' => 'required|integer|min:1',
-    ]);
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-    $cart = Cart::where('user_id', Auth::id())->firstOrFail();
+        $cart = Cart::where('user_id', Auth::id())->firstOrFail();
 
-    $cart->products()->updateExistingPivot($productId, [
-        'quantity' => $request->quantity
-    ]);
+        $cart->products()->updateExistingPivot($productId, [
+            'quantity' => $request->quantity
+        ]);
 
-    return response()->json(['success' => true]);
-}
+       return redirect()->back();
+
+    }
 
 
 
-public function removeProduct($productId)
-{
-    $cart = Cart::where('user_id', Auth::id())->firstOrFail();
+    public function removeProduct($productId)
+    {
+        $cart = Cart::where('user_id', Auth::id())->firstOrFail();
 
-    $cart->products()->detach($productId);
+        $cart->products()->detach($productId);
 
-    return redirect()->back();
-}
+        return redirect()->back();
+    }
 
 
 }
